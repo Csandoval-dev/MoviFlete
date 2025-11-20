@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viaje en curso - Fletes HN</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <header class="header-simple">
+        <div class="container">
+            <h2>🚚 Viaje en curso</h2>
+        </div>
+    </header>
+
+    <main class="viaje-container">
+        <div class="viaje-estado">
+            <div class="estado-header">
+                <img id="conductor-foto" src="" alt="Conductor" class="conductor-avatar">
+                <div>
+                    <h3 id="conductor-nombre"></h3>
+                    <p id="conductor-vehiculo"></p>
+                </div>
+            </div>
+            
+            <div class="estado-progreso">
+                <div class="paso" id="paso-1">
+                    <div class="paso-icono">✓</div>
+                    <div class="paso-info">
+                        <strong>Solicitado</strong>
+                        <small>Tu viaje ha sido solicitado</small>
+                    </div>
+                </div>
+                <div class="paso" id="paso-2">
+                    <div class="paso-icono">⏳</div>
+                    <div class="paso-info">
+                        <strong>Confirmado</strong>
+                        <small>El transportista aceptó</small>
+                    </div>
+                </div>
+                <div class="paso" id="paso-3">
+                    <div class="paso-icono">⏳</div>
+                    <div class="paso-info">
+                        <strong>En camino al origen</strong>
+                        <small>Llegará en <span id="tiempo-origen">5 min</span></small>
+                    </div>
+                </div>
+                <div class="paso" id="paso-4">
+                    <div class="paso-icono">⏳</div>
+                    <div class="paso-info">
+                        <strong>Cargando</strong>
+                        <small>En el punto de origen</small>
+                    </div>
+                </div>
+                <div class="paso" id="paso-5">
+                    <div class="paso-icono">⏳</div>
+                    <div class="paso-info">
+                        <strong>En tránsito</strong>
+                        <small>Llegará en <span id="tiempo-destino">15 min</span></small>
+                    </div>
+                </div>
+                <div class="paso" id="paso-6">
+                    <div class="paso-icono">⏳</div>
+                    <div class="paso-info">
+                        <strong>Completado</strong>
+                        <small>Viaje finalizado</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="viaje-info">
+                <div class="info-item">
+                    <span class="info-label">📍 Origen:</span>
+                    <span id="info-origen"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📍 Destino:</span>
+                    <span id="info-destino"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📦 Carga:</span>
+                    <span id="info-carga"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="viaje-mapa">
+            <div id="mapa"></div>
+            <div class="mapa-overlay">
+                <div class="overlay-card">
+                    <h4 id="estado-actual">Confirmando viaje...</h4>
+                    <p id="estado-detalle">El transportista está revisando tu solicitud</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-completado" class="modal">
+        <div class="modal-content">
+            <h3>🎉 ¡Viaje Completado!</h3>
+            <p>Tu carga ha llegado al destino exitosamente</p>
+            <div class="rating-form">
+                <p><strong>Califica tu experiencia:</strong></p>
+                <div class="rating-stars">
+                    <span class="star" data-rating="1">☆</span>
+                    <span class="star" data-rating="2">☆</span>
+                    <span class="star" data-rating="3">☆</span>
+                    <span class="star" data-rating="4">☆</span>
+                    <span class="star" data-rating="5">☆</span>
+                </div>
+                <textarea id="comentario-viaje" placeholder="Escribe un comentario (opcional)"></textarea>
+                <button class="btn-primary btn-large" onclick="finalizarViaje()">Finalizar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/mapa.js"></script>
+    <script>
+        // Proteger página
+        Auth.protegerPagina();
+    </script>
+</body>
+</html>

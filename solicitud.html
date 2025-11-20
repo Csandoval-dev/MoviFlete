@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Viaje - Fletes HN</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            background: #f9fafb;
+        }
+
+        .solicitud-page {
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .solicitud-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .solicitud-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-info h1 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-info p {
+            color: #6b7280;
+        }
+
+        .precio-acordado {
+            background: #dcfce7;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #86efac;
+        }
+
+        .precio-acordado small {
+            display: block;
+            color: #166534;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .precio-acordado strong {
+            font-size: 2rem;
+            color: #15803d;
+        }
+
+        .solicitud-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        .form-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+
+        .mapa-panel {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            height: 700px;
+        }
+
+        #mapa-solicitud {
+            width: 100%;
+            height: 100%;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .solicitud-content {
+                grid-template-columns: 1fr;
+            }
+
+            .mapa-panel {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="solicitud-page">
+        <div class="solicitud-container">
+            <div class="solicitud-header">
+                <div class="header-info">
+                    <h1>📦 Solicitud de Viaje</h1>
+                    <p>Completa los detalles de tu envío con <strong id="nombre-transportista"></strong></p>
+                </div>
+                <div class="precio-acordado">
+                    <small>Precio acordado</small>
+                    <strong id="precio-final">0 LPS</strong>
+                </div>
+            </div>
+
+            <div class="solicitud-content">
+                <!-- Panel Formulario -->
+                <div class="form-panel">
+                    <button onclick="window.history.back()" style="margin-bottom: 2rem; padding: 0.6rem 1.2rem; border: 2px solid #e5e7eb; background: white; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        ← Volver
+                    </button>
+
+                    <form id="form-solicitud-viaje">
+                        <div class="form-section">
+                            <h3>📍 Ubicaciones</h3>
+                            
+                            <button type="button" class="btn-ubicacion-gps" onclick="obtenerUbicacionActual()" style="width: 100%; margin-bottom: 1rem;">
+                                <span class="gps-icono">📍</span>
+                                <span class="gps-texto">Usar mi ubicación actual como origen</span>
+                            </button>
+
+                            <div class="form-group-custom">
+                                <label>Punto de Origen</label>
+                                <input type="text" id="origen" placeholder="Buscar dirección o click en mapa..." autocomplete="off" required>
+                                <div id="sugerencias-origen" class="sugerencias-mejoradas"></div>
+                            </div>
+
+                            <div class="form-group-custom">
+                                <label>Punto de Destino</label>
+                                <input type="text" id="destino" placeholder="Buscar dirección o click en mapa..." autocomplete="off" required>
+                                <div id="sugerencias-destino" class="sugerencias-mejoradas"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>📦 Detalles de la Carga</h3>
+                            <div class="form-group-custom">
+                                <label>Descripción</label>
+                                <textarea id="descripcion" rows="4" placeholder="Ej: Sofá de 2 metros, cajas de mudanza, electrodomésticos..." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="info-ruta" id="info-ruta-solicitud" style="display: none;">
+                            <div class="ruta-stat">
+                                <span class="stat-icon">📏</span>
+                                <div>
+                                    <small>Distancia</small>
+                                    <strong id="distancia-calculada">0 km</strong>
+                                </div>
+                            </div>
+                            <div class="ruta-stat">
+                                <span class="stat-icon">⏱️</span>
+                                <div>
+                                    <small>Tiempo estimado</small>
+                                    <strong id="tiempo-calculado">0 min</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-confirmar" style="margin-top: 2rem;">
+                            <span class="btn-icono">🚚</span>
+                            <span>Confirmar y Solicitar Viaje</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Panel Mapa -->
+                <div class="mapa-panel">
+                    <div id="mapa-solicitud"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Proteger página
+        Auth.protegerPagina();
+
+        // Obtener datos de la solicitud
+        const datosSolicitud = JSON.parse(localStorage.getItem('solicitudActual'));
+        if (!datosSolicitud) {
+            alert('No hay datos de solicitud');
+            window.location.href = 'index.html';
+        }
+
+        // Mostrar información
+        document.getElementById('nombre-transportista').textContent = datosSolicitud.transportista.nombre;
+        document.getElementById('precio-final').textContent = datosSolicitud.precioAcordado.toLocaleString() + ' LPS';
+
+        // Variables del mapa
+        let mapa;
+        let marcadorOrigen;
+        let marcadorDestino;
+        let coordOrigen = null;
+        let coordDestino = null;
+        let rutaLinea = null;
+
+        // Inicializar mapa
+        const centro = [15.5050, -88.0250];
+        mapa = L.map('mapa-solicitud').setView(centro, 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap',
+            maxZoom: 19
+        }).addTo(mapa);
+
+        // Click en mapa
+        mapa.on('click', function(e) {
+            const coord = [e.latlng.lat, e.latlng.lng];
+            
+            if (!coordOrigen) {
+                coordOrigen = coord;
+                colocarMarcadorOrigen(coord);
+                obtenerDireccion(coord, 'origen');
+            } else if (!coordDestino) {
+                coordDestino = coord;
+                colocarMarcadorDestino(coord);
+                obtenerDireccion(coord, 'destino');
+                calcularRuta();
+            }
+        });
+
+        function colocarMarcadorOrigen(coord) {
+            if (marcadorOrigen) mapa.removeLayer(marcadorOrigen);
+            
+            marcadorOrigen = L.marker(coord, {
+                icon: L.divIcon({
+                    html: '<div class="marcador-animado verde"><span>A</span></div>',
+                    iconSize: [50, 50],
+                    iconAnchor: [25, 50]
+                }),
+                draggable: true
+            }).addTo(mapa);
+
+            marcadorOrigen.on('dragend', function(e) {
+                const pos = e.target.getLatLng();
+                coordOrigen = [pos.lat, pos.lng];
+                obtenerDireccion(coordOrigen, 'origen');
+                if (coordDestino) calcularRuta();
+            });
+        }
+
+        function colocarMarcadorDestino(coord) {
+            if (marcadorDestino) mapa.removeLayer(marcadorDestino);
+            
+            marcadorDestino = L.marker(coord, {
+                icon: L.divIcon({
+                    html: '<div class="marcador-animado rojo"><span>B</span></div>',
+                    iconSize: [50, 50],
+                    iconAnchor: [25, 50]
+                }),
+                draggable: true
+            }).addTo(mapa);
+
+            marcadorDestino.on('dragend', function(e) {
+                const pos = e.target.getLatLng();
+                coordDestino = [pos.lat, pos.lng];
+                obtenerDireccion(coordDestino, 'destino');
+                calcularRuta();
+            });
+        }
+
+        async function obtenerDireccion(coord, tipo) {
+            try {
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${coord[0]}&lon=${coord[1]}&accept-language=es`
+                );
+                const data = await response.json();
+                document.getElementById(tipo).value = data.display_name;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function calcularRuta() {
+            if (!coordOrigen || !coordDestino) return;
+
+            if (rutaLinea) mapa.removeLayer(rutaLinea);
+
+            rutaLinea = L.polyline([coordOrigen, coordDestino], {
+                color: '#2563eb',
+                weight: 4,
+                opacity: 0.7
+            }).addTo(mapa);
+
+            mapa.fitBounds(rutaLinea.getBounds(), { padding: [50, 50] });
+
+            const R = 6371;
+            const dLat = (coordDestino[0] - coordOrigen[0]) * Math.PI / 180;
+            const dLon = (coordDestino[1] - coordOrigen[1]) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(coordOrigen[0] * Math.PI / 180) * Math.cos(coordDestino[0] * Math.PI / 180) *
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distancia = R * c;
+            const tiempo = Math.round(distancia * 3);
+
+            document.getElementById('info-ruta-solicitud').style.display = 'flex';
+            document.getElementById('distancia-calculada').textContent = distancia.toFixed(1) + ' km';
+            document.getElementById('tiempo-calculado').textContent = tiempo + ' min';
+        }
+
+        function obtenerUbicacionActual() {
+            if (!navigator.geolocation) {
+                alert('Tu navegador no soporta geolocalización');
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const coord = [position.coords.latitude, position.coords.longitude];
+                    coordOrigen = coord;
+                    colocarMarcadorOrigen(coord);
+                    obtenerDireccion(coord, 'origen');
+                    mapa.setView(coord, 15);
+                    alert('✓ Ubicación actual establecida como origen');
+                },
+                (error) => {
+                    alert('No se pudo obtener tu ubicación');
+                }
+            );
+        }
+
+        // Enviar solicitud
+        document.getElementById('form-solicitud-viaje').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!coordOrigen || !coordDestino) {
+                alert('Por favor selecciona origen y destino en el mapa o búscalos');
+                return;
+            }
+
+            const viaje = {
+                transportista: datosSolicitud.transportista,
+                origen: document.getElementById('origen').value,
+                destino: document.getElementById('destino').value,
+                descripcion: document.getElementById('descripcion').value,
+                coordOrigen: coordOrigen,
+                coordDestino: coordDestino,
+                precioAcordado: datosSolicitud.precioAcordado,
+                fecha: new Date().toISOString()
+            };
+            
+            localStorage.setItem('viajeActual', JSON.stringify(viaje));
+            localStorage.removeItem('solicitudActual');
+            
+            window.location.href = 'viaje.html';
+        });
+
+        // Búsqueda de direcciones
+        let timeoutBusqueda;
+        ['origen', 'destino'].forEach(tipo => {
+            document.getElementById(tipo).addEventListener('input', function(e) {
+                clearTimeout(timeoutBusqueda);
+                const query = e.target.value;
+                if (query.length < 3) {
+                    document.getElementById(`sugerencias-${tipo}`).innerHTML = '';
+                    return;
+                }
+                timeoutBusqueda = setTimeout(() => buscarDireccion(query, tipo), 500);
+            });
+        });
+
+        async function buscarDireccion(query, tipo) {
+            try {
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + ', San Pedro Sula, Honduras')}&limit=5&accept-language=es`
+                );
+                const resultados = await response.json();
+                mostrarSugerencias(resultados, tipo);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function mostrarSugerencias(resultados, tipo) {
+            const container = document.getElementById(`sugerencias-${tipo}`);
+            
+            if (resultados.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = resultados.map(r => `
+                <div class="sugerencia-mejorada" onclick='seleccionarDireccion(${r.lat}, ${r.lon}, \`${r.display_name}\`, "${tipo}")'>
+                    <div class="sugerencia-icono">📍</div>
+                    <div class="sugerencia-info">
+                        <strong>${r.display_name.split(',')[0]}</strong>
+                        <small>${r.display_name}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function seleccionarDireccion(lat, lon, nombre, tipo) {
+            const coord = [parseFloat(lat), parseFloat(lon)];
+            
+            if (tipo === 'origen') {
+                coordOrigen = coord;
+                colocarMarcadorOrigen(coord);
+            } else {
+                coordDestino = coord;
+                colocarMarcadorDestino(coord);
+            }
+
+            document.getElementById(tipo).value = nombre;
+            document.getElementById(`sugerencias-${tipo}`).innerHTML = '';
+            mapa.setView(coord, 15);
+            
+            if (coordOrigen && coordDestino) {
+                calcularRuta();
+            }
+        }
+    </script>
+</body>
+</html>

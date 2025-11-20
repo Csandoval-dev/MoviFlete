@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fletes HN - Encuentra tu transportista</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🚚 Fletes HN</h1>
+                <p>Conectamos tu carga con el transporte ideal</p>
+            </div>
+            <nav style="display: flex; align-items: center; gap: 1rem;">
+                <span id="usuario-nombre" style="color: white; font-weight: 500;"></span>
+                <button class="btn-secondary" onclick="Auth.logout()">Cerrar Sesión</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>¿Necesitas mover algo en San Pedro Sula?</h2>
+            <p>Encuentra transportistas confiables cerca de ti</p>
+        </section>
+
+        <section class="filtros">
+            <div class="filtro-grupo">
+                <label for="zona">📍 Zona:</label>
+                <select id="zona">
+                    <option value="">Todas las zonas</option>
+                    <option value="Centro">Centro</option>
+                    <option value="Choloma">Choloma</option>
+                    <option value="Zona Norte">Zona Norte</option>
+                    <option value="Zona Este">Zona Este</option>
+                    <option value="Zona Sur">Zona Sur</option>
+                    <option value="Rivera Hernández">Rivera Hernández</option>
+                </select>
+            </div>
+            <div class="filtro-grupo">
+                <label for="vehiculo">🚗 Tipo de vehículo:</label>
+                <select id="vehiculo">
+                    <option value="">Todos los vehículos</option>
+                    <option value="Pickup">Pickup</option>
+                    <option value="Panel">Panel</option>
+                    <option value="Camión">Camión 3.5 ton</option>
+                    <option value="Motocicleta">Motocicleta</option>
+                </select>
+            </div>
+            <button class="btn-primary" onclick="filtrarTransportistas()">Buscar</button>
+        </section>
+
+        <section class="resultados">
+            <h3>Transportistas disponibles <span id="contador">(0)</span></h3>
+            <div id="lista-transportistas" class="grid-transportistas">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Fletes HN - San Pedro Sula, Honduras</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Proteger página - requiere login
+        Auth.protegerPagina();
+        
+        // Mostrar nombre del usuario
+        const usuario = Auth.obtenerUsuarioActual();
+        if (usuario) {
+            document.getElementById('usuario-nombre').textContent = `Hola, ${usuario.nombre}`;
+        }
+    </script>
+</body>
+</html>

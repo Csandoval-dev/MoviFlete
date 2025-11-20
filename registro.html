@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Fletes HN</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            padding: 2rem;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 450px;
+            width: 100%;
+            padding: 3rem;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .auth-title {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-subtitle {
+            color: var(--text-light);
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .auth-form .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .auth-form .btn-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .back-to-home {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-to-home a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-to-home a:hover {
+            color: var(--text);
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .demo-credentials {
+            background: #fef3c7;
+            border: 2px solid #fbbf24;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-credentials h4 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .demo-credentials p {
+            color: #78350f;
+            font-size: 0.85rem;
+            margin: 0.25rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="back-to-home">
+                <a href="landing.html">← Volver al inicio</a>
+            </div>
+
+            <div class="auth-header">
+                <div class="auth-logo">🚚</div>
+                <h1 class="auth-title">Bienvenido</h1>
+                <p class="auth-subtitle">Inicia sesión para continuar</p>
+            </div>
+
+            <div class="demo-credentials">
+                <h4>💡 Cuentas de prueba:</h4>
+                <p><strong>Usuario:</strong> usuario@test.com / 123456</p>
+                <p><strong>Transportista:</strong> transportista@test.com / 123456</p>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="email" placeholder="tu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="password" placeholder="Tu contraseña" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Iniciar Sesión</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Manejar envío del formulario
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const errorMsg = document.getElementById('error-message');
+            const successMsg = document.getElementById('success-message');
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // Obtener valores
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Intentar login
+            const resultado = Auth.login(email, password);
+
+            if (resultado.success) {
+                successMsg.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
+                successMsg.style.display = 'block';
+                
+                setTimeout(() => {
+                    // Redirigir según tipo de usuario
+                    if (resultado.usuario.tipo === 'transportista') {
+                        // Por ahora también va a index.html
+                        window.location.href = 'index.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                }, 1500);
+            } else {
+                errorMsg.textContent = resultado.message;
+                errorMsg.style.display = 'block';
+            }
+        });
+
+        // Verificar si ya hay sesión activa
+        const usuarioActual = Auth.obtenerUsuarioActual();
+        if (usuarioActual) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fletes HN - Plataforma Profesional de Transporte</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Navegación Profesional */
+        .nav-profesional {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1.2rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-profesional {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-nav {
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-login {
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            background: transparent;
+        }
+
+        .btn-login:hover {
+            background: #eff6ff;
+        }
+
+        .btn-registro {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-registro:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Hero Profesional */
+        .hero-profesional {
+            margin-top: 85px;
+            min-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4rem 2rem;
+            gap: 4rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-hero-primary {
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-hero-secondary {
+            padding: 1.2rem 2.5rem;
+            background: white;
+            color: #2563eb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-hero-secondary:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2563eb;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        /* Características Profesionales */
+        .features-pro {
+            padding: 6rem 2rem;
+            background: #f9fafb;
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+
+        .features-grid-pro {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card-pro {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid #f3f4f6;
+        }
+
+        .feature-card-pro:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon-pro {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title-pro {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc-pro {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-final::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            color: white;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-button {
+            padding: 1.3rem 3rem;
+            background: white;
+            color: #2563eb;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Footer Profesional */
+        .footer-pro {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #9ca3af;
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-profesional {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-ctas {
+                justify-content: center;
+            }
+
+            .features-grid-pro {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="nav-profesional">
+        <div class="nav-container">
+            <div class="logo-profesional">
+                <div class="logo-icon">🚚</div>
+                <span>Fletes HN</span>
+            </div>
+            <div class="nav-links">
+                <a href="#caracteristicas">Características</a>
+                <a href="#como-funciona">Cómo funciona</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="login.html" class="btn-nav btn-registro">Iniciar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-profesional">
+        <div class="hero-content">
+            <h1>
+                Transporta tu carga de forma
+                <span class="hero-highlight">rápida y segura</span>
+            </h1>
+            <p>
+                Conectamos empresas y personas con transportistas profesionales 
+                verificados en San Pedro Sula. Seguimiento GPS en tiempo real.
+            </p>
+            <div class="hero-ctas">
+                <a href="login.html" class="btn-hero-primary">Empezar Ahora</a>
+                <a href="#caracteristicas" class="btn-hero-secondary">Conocer Más</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Transportistas activos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Envíos completados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9★</span>
+                    <span class="stat-label">Calificación promedio</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80" alt="Camión de transporte">
+        </div>
+    </section>
+
+    <!-- Características -->
+    <section class="features-pro" id="caracteristicas">
+        <div class="features-container">
+            <div class="section-header">
+                <span class="section-tag">¿Por qué elegirnos?</span>
+                <h2 class="section-title">Todo lo que necesitas en un solo lugar</h2>
+                <p class="section-subtitle">Tecnología y seguridad para tu tranquilidad</p>
+            </div>
+            <div class="features-grid-pro">
+                <div class="feature-card-pro">
+                    <div class="feature-icon-pro">📍</div>
+                    <h3 class="feature-title-pro">GPS en Tiempo Real</h3>
+                    <p class="feature-desc-pro">
+                        Rastrea tu envío en cada momento con nuestro sistema de 
+                        seguimiento satelital profesional.
+                    </p>
+                </div>
+                <div class="feature-card-pro">
+                    <div class="feature-icon-pro">✓</div>
+                    <h3 class="feature-title-pro">Transportistas Verificados</h3>
+                    <p class="feature-desc-pro">
+                        Todos nuestros conductores pasan verificación de identidad, 
+                        licencias y antecedentes.
+                    </p>
+                </div>
+                <div class="feature-card-pro">
+                    <div class="feature-icon-pro">💰</div>
+                    <h3 class="feature-title-pro">Precios Transparentes</h3>
+                    <p class="feature-desc-pro">
+                        Sin costos ocultos. Calcula el precio exacto antes de 
+                        confirmar tu envío.
+                    </p>
+                </div>
+                <div class="feature-card-pro">
+                    <div class="feature-icon-pro">🔒</div>
+                    <h3 class="feature-title-pro">Seguro Incluido</h3>
+                    <p class="feature-desc-pro">
+                        Tu carga está protegida con seguro de cobertura completa 
+                        en cada envío.
+                    </p>
+                </div>
+                <div class="feature-card-pro">
+                    <div class="feature-icon-pro">⚡</div>
+                    <h3 class="feature-title-pro">Servicio Express</h3>
+                    <p class="feature-desc-pro">
+                        Encuentra transportistas disponibles en minutos. 
+                        Entregas el mismo día.
+                    </p>
+                </div>
+                <div class="feature-card-pro">
+                    <div class="feature-icon-pro">📱</div>
+                    <h3 class="feature-title-pro">App Móvil</h3>
+                    <p class="feature-desc-pro">
+                        Gestiona tus envíos desde cualquier lugar con nuestra 
+                        aplicación móvil.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="cta-content">
+            <h2>¿Listo para empezar?</h2>
+            <p>Únete a cientos de empresas que ya confían en Fletes HN</p>
+            <a href="login.html" class="cta-button">Iniciar Sesión</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-pro">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>🚚 Fletes HN</h3>
+                <p>
+                    Plataforma profesional de conexión entre usuarios y 
+                    transportistas en San Pedro Sula, Honduras.
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4>Producto</h4>
+                <a href="#caracteristicas">Características</a>
+                <a href="#como-funciona">Cómo funciona</a>
+                <a href="#">Precios</a>
+                <a href="#">API</a>
+            </div>
+            <div class="footer-column">
+                <h4>Empresa</h4>
+                <a href="#">Sobre nosotros</a>
+                <a href="#">Carreras</a>
+                <a href="#">Blog</a>
+                <a href="#">Prensa</a>
+            </div>
+            <div class="footer-column">
+                <h4>Soporte</h4>
+                <a href="#">Centro de ayuda</a>
+                <a href="#">Contacto</a>
+                <a href="#">Estado del servicio</a>
+                <a href="#">Términos legales</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Fletes HN. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
