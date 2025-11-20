@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fletes HN - Plataforma Profesional de Transporte</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Movi Fletes  - Plataforma Profesional de Transporte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,17 +15,19 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             overflow-x: hidden;
+            background: #0a0a0a;
+            color: #ffffff;
         }
 
-        /* Navegación Profesional */
+        /* Navegación Elegante */
         .nav-profesional {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             z-index: 1000;
             padding: 1.2rem 0;
         }
@@ -44,20 +46,26 @@
             align-items: center;
             gap: 0.75rem;
             font-size: 1.5rem;
-            font-weight: 800;
-            color: #1a1a1a;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.5px;
         }
 
         .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .logo-icon img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
         }
 
         .nav-links {
@@ -68,76 +76,104 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #4b5563;
+            color: #a0a0a0;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             font-size: 0.95rem;
+            letter-spacing: -0.2px;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #2563eb;
+            color: #ffffff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-buttons {
             display: flex;
             gap: 1rem;
+            align-items: center;
         }
 
         .btn-nav {
-            padding: 0.7rem 1.5rem;
-            border-radius: 10px;
+            padding: 0.75rem 1.8rem;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
             font-size: 0.95rem;
+            letter-spacing: -0.2px;
+            border: 2px solid transparent;
         }
 
         .btn-login {
-            color: #2563eb;
-            border: 2px solid #2563eb;
-            background: transparent;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .btn-login:hover {
-            background: #eff6ff;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .btn-registro {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
         }
 
         .btn-registro:hover {
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
 
-        /* Hero Profesional */
+        /* Hero Premium */
         .hero-profesional {
-            margin-top: 85px;
+            margin-top: 90px;
             min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+        }
+
+        .hero-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 4rem 2rem;
-            gap: 4rem;
+            gap: 5rem;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-content h1 {
-            font-size: 4rem;
-            line-height: 1.1;
+            font-size: 4.5rem;
+            line-height: 1.05;
             margin-bottom: 1.5rem;
-            color: #1a1a1a;
-            font-weight: 800;
-        }
-
-        .hero-highlight {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -145,60 +181,66 @@
 
         .hero-content p {
             font-size: 1.25rem;
-            color: #6b7280;
+            color: #a0a0a0;
             margin-bottom: 2.5rem;
             line-height: 1.6;
+            max-width: 540px;
         }
 
         .hero-ctas {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            gap: 1.2rem;
+            margin-bottom: 3.5rem;
         }
 
         .btn-hero-primary {
-            padding: 1.2rem 2.5rem;
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            color: white;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #ffffff;
             border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            border-radius: 14px;
+            font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
             transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            letter-spacing: -0.3px;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
         }
 
         .btn-hero-primary:hover {
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
         }
 
         .btn-hero-secondary {
-            padding: 1.2rem 2.5rem;
-            background: white;
-            color: #2563eb;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 1.2rem 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s;
+            letter-spacing: -0.3px;
+            backdrop-filter: blur(10px);
         }
 
         .btn-hero-secondary:hover {
-            border-color: #2563eb;
-            background: #eff6ff;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
         }
 
         .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            display: flex;
+            gap: 3rem;
         }
 
         .stat-item {
@@ -206,33 +248,186 @@
         }
 
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #2563eb;
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: block;
+            letter-spacing: -1px;
         }
 
         .stat-label {
-            font-size: 0.95rem;
-            color: #6b7280;
+            font-size: 0.9rem;
+            color: #666666;
             margin-top: 0.25rem;
+            letter-spacing: -0.2px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
         }
 
         .hero-image {
-            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .hero-image img {
             width: 100%;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            display: block;
         }
 
-        /* Características Profesionales */
+        /* Carousel Premium */
+        .carousel-section {
+            padding: 8rem 2rem;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .carousel-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .carousel-tag {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .carousel-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            letter-spacing: -1.5px;
+        }
+
+        .carousel-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 3rem;
+            color: white;
+        }
+
+        .carousel-content h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .carousel-content p {
+            font-size: 1.1rem;
+            color: #d0d0d0;
+            max-width: 600px;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            pointer-events: none;
+        }
+
+        .carousel-btn {
+            pointer-events: all;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: #3b82f6;
+            width: 35px;
+            border-radius: 10px;
+        }
+
+        /* Características Premium */
         .features-pro {
-            padding: 6rem 2rem;
-            background: #f9fafb;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            position: relative;
         }
 
         .features-container {
@@ -242,30 +437,35 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .section-tag {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #dbeafe;
-            color: #2563eb;
-            border-radius: 20px;
+            padding: 0.6rem 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border-radius: 50px;
             font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #1a1a1a;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffffff;
             margin-bottom: 1rem;
+            letter-spacing: -1.5px;
         }
 
         .section-subtitle {
             font-size: 1.2rem;
-            color: #6b7280;
+            color: #808080;
+            letter-spacing: -0.3px;
         }
 
         .features-grid-pro {
@@ -275,47 +475,75 @@
         }
 
         .feature-card-pro {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-            border: 1px solid #f3f4f6;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 3rem;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card-pro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card-pro:hover::before {
+            opacity: 1;
         }
 
         .feature-card-pro:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.1);
         }
 
-        .feature-icon-pro {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
+        .feature-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
             margin-bottom: 1.5rem;
         }
 
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .feature-card-pro:hover .feature-image img {
+            transform: scale(1.1);
+        }
+
         .feature-title-pro {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
         }
 
         .feature-desc-pro {
-            color: #6b7280;
+            color: #999999;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        /* CTA Final */
+        /* CTA Final Premium */
         .cta-final {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             position: relative;
             overflow: hidden;
         }
@@ -323,12 +551,18 @@
         .cta-final::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>');
-            opacity: 0.3;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .cta-content {
@@ -340,43 +574,47 @@
         }
 
         .cta-content h2 {
-            font-size: 3rem;
-            color: white;
-            font-weight: 800;
+            font-size: 3.5rem;
+            color: #ffffff;
+            font-weight: 900;
             margin-bottom: 1.5rem;
+            letter-spacing: -1.5px;
         }
 
         .cta-content p {
             font-size: 1.3rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 2.5rem;
+            letter-spacing: -0.3px;
         }
 
         .cta-button {
-            padding: 1.3rem 3rem;
-            background: white;
-            color: #2563eb;
+            padding: 1.3rem 3.5rem;
+            background: #ffffff;
+            color: #1e3a8a;
             border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
+            border-radius: 14px;
+            font-size: 1.15rem;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            letter-spacing: -0.3px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
-        /* Footer Profesional */
+        /* Footer Premium */
         .footer-pro {
-            background: #1a1a1a;
-            color: white;
+            background: #0a0a0a;
+            color: #ffffff;
             padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .footer-grid {
@@ -389,53 +627,58 @@
         }
 
         .footer-brand h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
         }
 
         .footer-brand p {
-            color: #9ca3af;
+            color: #666666;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .footer-column h4 {
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         .footer-column a {
             display: block;
-            color: #9ca3af;
+            color: #808080;
             text-decoration: none;
             margin-bottom: 0.75rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 0.95rem;
         }
 
         .footer-column a:hover {
-            color: white;
+            color: #3b82f6;
+            transform: translateX(5px);
         }
 
         .footer-bottom {
             max-width: 1400px;
             margin: 0 auto;
             padding-top: 2rem;
-            border-top: 1px solid #374151;
-            text-align: center;
-            color: #9ca3af;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666666;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 1024px) {
-            .hero-profesional {
+            .hero-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
             }
 
             .hero-content h1 {
                 font-size: 3rem;
-            }
-
-            .hero-ctas {
-                justify-content: center;
             }
 
             .features-grid-pro {
@@ -457,8 +700,10 @@
     <nav class="nav-profesional">
         <div class="nav-container">
             <div class="logo-profesional">
-                <div class="logo-icon">🚚</div>
-                <span>Fletes HN</span>
+                <div class="logo-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2769/2769339.png" alt="Truck">
+                </div>
+                <span>Movi Fletes </span>
             </div>
             <div class="nav-links">
                 <a href="#caracteristicas">Características</a>
@@ -466,43 +711,85 @@
                 <a href="#contacto">Contacto</a>
             </div>
             <div class="nav-buttons">
-                <a href="login.html" class="btn-nav btn-registro">Iniciar Sesión</a>
+                <a href="login.html" class="btn-nav btn-login">Iniciar Sesión</a>
+            >
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero-profesional">
-        <div class="hero-content">
-            <h1>
-                Transporta tu carga de forma
-                <span class="hero-highlight">rápida y segura</span>
-            </h1>
-            <p>
-                Conectamos empresas y personas con transportistas profesionales 
-                verificados en San Pedro Sula. Seguimiento GPS en tiempo real.
-            </p>
-            <div class="hero-ctas">
-                <a href="login.html" class="btn-hero-primary">Empezar Ahora</a>
-                <a href="#caracteristicas" class="btn-hero-secondary">Conocer Más</a>
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Transporta con confianza y seguridad</h1>
+                <p>
+                    Conectamos empresas con transportistas profesionales verificados. 
+                    Seguimiento GPS en tiempo real y seguro incluido en cada envío.
+                </p>
+                <div class="hero-ctas">
+                    <a href="login.html" class="btn-hero-primary">Empezar ahora →</a>
+                    <a href="#caracteristicas" class="btn-hero-secondary">Conocer más</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Transportistas activos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Envíos completados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9★</span>
+                        <span class="stat-label">Calificación promedio</span>
+                    </div>
+                </div>
             </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Transportistas activos</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10K+</span>
-                    <span class="stat-label">Envíos completados</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">4.9★</span>
-                    <span class="stat-label">Calificación promedio</span>
+            <div class="hero-image-wrapper">
+                <div class="hero-image">
+                    <img src="assets/Portada1.png" alt="Camión profesional">
                 </div>
             </div>
         </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80" alt="Camión de transporte">
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel-section">
+        <div class="carousel-header">
+            <span class="carousel-tag">Nuestros Servicios</span>
+            <h2 class="carousel-title">Experiencia de transporte </h2>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <img src="assets/flete.jpg" alt="Flota de transporte">
+                        <div class="carousel-content">
+                            <h3>Flota Moderna y Equipada</h3>
+                            <p>Vehículos de última generación con tecnología GPS y sistemas de seguridad avanzados para garantizar la integridad de tu carga.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1400&q=80" alt="Conductor profesional">
+                        <div class="carousel-content">
+                            <h3>Conductores Certificados</h3>
+                            <p>Personal capacitado y verificado con años de experiencia en transporte de carga. Tu mercancía en manos expertas.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=1400&q=80" alt="Seguimiento en tiempo real">
+                        <div class="carousel-content">
+                            <h3>Control Total en Tiempo Real</h3>
+                            <p>Monitorea cada movimiento de tu envío con nuestra plataforma de seguimiento GPS en vivo desde cualquier dispositivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="moveCarousel(-1)">‹</button>
+                <button class="carousel-btn" onclick="moveCarousel(1)">›</button>
+            </div>
+            <div class="carousel-dots" id="carouselDots"></div>
         </div>
     </section>
 
@@ -510,57 +797,63 @@
     <section class="features-pro" id="caracteristicas">
         <div class="features-container">
             <div class="section-header">
-                <span class="section-tag">¿Por qué elegirnos?</span>
-                <h2 class="section-title">Todo lo que necesitas en un solo lugar</h2>
+                <span class="section-tag">Por qué elegirnos</span>
+                <h2 class="section-title">Ventajas que nos destacan</h2>
                 <p class="section-subtitle">Tecnología y seguridad para tu tranquilidad</p>
             </div>
             <div class="features-grid-pro">
                 <div class="feature-card-pro">
-                    <div class="feature-icon-pro">📍</div>
+                    <div class="feature-image">
+                        <img src="assets/gps.jpg" alt="GPS Tracking">
+                    </div>
                     <h3 class="feature-title-pro">GPS en Tiempo Real</h3>
                     <p class="feature-desc-pro">
-                        Rastrea tu envío en cada momento con nuestro sistema de 
-                        seguimiento satelital profesional.
+                        Sistema de rastreo satelital profesional. Monitorea tu carga 24/7 con precisión de metros.
                     </p>
                 </div>
                 <div class="feature-card-pro">
-                    <div class="feature-icon-pro">✓</div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="Verificación">
+                    </div>
                     <h3 class="feature-title-pro">Transportistas Verificados</h3>
                     <p class="feature-desc-pro">
-                        Todos nuestros conductores pasan verificación de identidad, 
-                        licencias y antecedentes.
+                        Verificación completa de identidad, licencias y antecedentes. Solo profesionales confiables.
                     </p>
                 </div>
                 <div class="feature-card-pro">
-                    <div class="feature-icon-pro">💰</div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80" alt="Precios">
+                    </div>
                     <h3 class="feature-title-pro">Precios Transparentes</h3>
                     <p class="feature-desc-pro">
-                        Sin costos ocultos. Calcula el precio exacto antes de 
-                        confirmar tu envío.
+                        Cotización instantánea sin sorpresas. Lo que ves es lo que pagas, siempre.
                     </p>
                 </div>
                 <div class="feature-card-pro">
-                    <div class="feature-icon-pro">🔒</div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="Seguro">
+                    </div>
                     <h3 class="feature-title-pro">Seguro Incluido</h3>
                     <p class="feature-desc-pro">
-                        Tu carga está protegida con seguro de cobertura completa 
-                        en cada envío.
+                        Cobertura completa en cada envío. Tu inversión siempre protegida.
                     </p>
                 </div>
                 <div class="feature-card-pro">
-                    <div class="feature-icon-pro">⚡</div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80" alt="Express">
+                    </div>
                     <h3 class="feature-title-pro">Servicio Express</h3>
                     <p class="feature-desc-pro">
-                        Encuentra transportistas disponibles en minutos. 
-                        Entregas el mismo día.
+                        Conexión inmediata con transportistas. Entregas el mismo día disponibles.
                     </p>
                 </div>
                 <div class="feature-card-pro">
-                    <div class="feature-icon-pro">📱</div>
-                    <h3 class="feature-title-pro">App Móvil</h3>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" alt="App Móvil">
+                    </div>
+                    <h3 class="feature-title-pro">App Móvil Completa</h3>
                     <p class="feature-desc-pro">
-                        Gestiona tus envíos desde cualquier lugar con nuestra 
-                        aplicación móvil.
+                        Gestiona todo desde tu smartphone. iOS y Android con notificaciones en tiempo real.
                     </p>
                 </div>
             </div>
@@ -571,8 +864,8 @@
     <section class="cta-final">
         <div class="cta-content">
             <h2>¿Listo para empezar?</h2>
-            <p>Únete a cientos de empresas que ya confían en Fletes HN</p>
-            <a href="login.html" class="cta-button">Iniciar Sesión</a>
+            <p>Únete a cientos de empresas que ya confían en Fletes HN para su logística</p>
+            <a href="login.html" class="cta-button">Crear cuenta gratis →</a>
         </div>
     </section>
 
@@ -580,10 +873,11 @@
     <footer class="footer-pro">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h3>🚚 Fletes HN</h3>
+                <h3>Fletes HN</h3>
                 <p>
                     Plataforma profesional de conexión entre usuarios y 
-                    transportistas en San Pedro Sula, Honduras.
+                    transportistas en San Pedro Sula, Honduras. Tecnología 
+                    y seguridad al servicio de tu negocio.
                 </p>
             </div>
             <div class="footer-column">
@@ -591,7 +885,7 @@
                 <a href="#caracteristicas">Características</a>
                 <a href="#como-funciona">Cómo funciona</a>
                 <a href="#">Precios</a>
-                <a href="#">API</a>
+                <a href="#">API Developers</a>
             </div>
             <div class="footer-column">
                 <h4>Empresa</h4>
@@ -609,8 +903,62 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Fletes HN. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Movi Fletes. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        // Carousel Functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const track = document.getElementById('carouselTrack');
+        const dotsContainer = document.getElementById('carouselDots');
+
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(index);
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveCarousel(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Auto-play carousel
+        setInterval(() => {
+            moveCarousel(1);
+        }, 5000);
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
