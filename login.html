@@ -529,7 +529,7 @@
             var Auth = {
                 obtenerUsuarioActual: function() { return null; },
                 login: function(u, p) {
-                    if (u === 'admin' && p === 'password') {
+                    if (u === 'admin' && p === 'admin') {
                         return { success: true, message: '' };
                     }
                     return { success: false, message: 'Usuario o contraseña incorrectos.' };
