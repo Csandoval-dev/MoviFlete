@@ -5,29 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Fletes HN</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* 1. PALETA DE COLORES Y ESTILOS BASE */
         :root {
-            --color-dark-bg: #0e0e0e;        /* Fondo principal (casi negro) */
-            --color-dark-panel: #1a1a1a;     /* Panel del formulario (gris oscuro sutil) */
-            --color-input-bg: #292929;       /* Fondo de los campos de input */
-            --color-primary-accent: #007bff; /* Azul brillante para acción principal */
+            --color-dark-bg: #0e0e0e;
+            --color-dark-panel: #1a1a1a;
+            --color-input-bg: #292929;
+            --color-primary-accent: #007bff;
             --color-primary-dark: #0056b3;
             --color-text-light: #f5f5f5;
             --color-text-subtle: #9e9e9e;
             --color-border: #444444;
-
-            /* Colores de Marca Sociales (Originales para simulación) */
             --color-google-bg: #FFFFFF;
             --color-google-text: #000000;
             --color-google-blue: #4285F4;
             --color-google-red: #DB4437;
             --color-google-yellow: #F4B400;
             --color-google-green: #0F9D58;
-            
             --color-facebook-bg: #1877F2;
             --color-facebook-text: #FFFFFF;
-            
             --transition-speed: 0.3s;
         }
 
@@ -52,10 +49,9 @@
             height: 100vh;
         }
 
-        /* 2. PANEL VISUAL (CON IMAGEN CLARA Y PROFESIONAL - MEJOR VISIBILIDAD) */
+        /* PANEL VISUAL */
         .login-visual {
-            /* Una imagen más clara y visible, con una superposición sutil */
-           background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7))
+            background: linear-gradient(135deg, rgba(47, 45, 45, 0.7), rgba(255, 255, 255, 0.7)),
                         url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80');
             background-size: cover;
             background-position: center;
@@ -64,10 +60,9 @@
             justify-content: space-between;
             padding: 4rem;
             color: var(--color-text-light);
-            position: relative; /* Para el pseudo-elemento si lo volvemos a usar */
+            position: relative;
         }
-        
-        /* Ajuste para asegurar que la imagen no se sienta tapada */
+
         .login-visual::before {
             content: '';
             position: absolute;
@@ -75,14 +70,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            /* Aquí podemos añadir un pattern sutil si queremos, pero por ahora lo quitamos para más claridad de la imagen */
-            /* background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.05"/></svg>'); */
-            z-index: 0; /* Asegura que el contenido esté por encima */
+            z-index: 0;
         }
 
         .visual-content {
             padding-top: 2rem;
-            position: relative; /* Asegura que el contenido esté sobre la superposición */
+            position: relative;
             z-index: 1;
         }
 
@@ -118,15 +111,12 @@
 
         .visual-content p {
             font-size: 1.1rem;
-            opacity: 0.95; /* Mayor opacidad para el texto */
+            opacity: 0.95;
             line-height: 1.6;
             max-width: 90%;
         }
-        
-        .visual-stats { display: none; } /* Mantenemos las estadísticas ocultas para un diseño más limpio */
 
-
-        /* PANEL DEL FORMULARIO (Gris Oscuro) */
+        /* PANEL DEL FORMULARIO */
         .login-form-panel {
             background: var(--color-dark-panel);
             display: flex;
@@ -172,7 +162,7 @@
             font-size: 1rem;
         }
 
-        /* 3. CAMPOS DE FORMULARIO CON BOTÓN DE OJO */
+        /* CAMPOS DE FORMULARIO */
         .form-group-login {
             margin-bottom: 1.5rem;
         }
@@ -211,7 +201,7 @@
             color: var(--color-text-subtle);
         }
 
-        /* Botón de Ojo (Toggle de Contraseña) */
+        /* BOTÓN DE OJO */
         .password-toggle {
             position: absolute;
             right: 1rem;
@@ -250,7 +240,11 @@
             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
         }
 
-        /* 4. LOGIN SOCIAL (Iconos Originales - Usando SVG o Emulando con CSS/HTML) */
+        .btn-submit-login:active {
+            transform: translateY(0);
+        }
+
+        /* SEPARADOR SOCIAL */
         .social-login-separator {
             display: flex;
             align-items: center;
@@ -258,7 +252,8 @@
             margin: 1.5rem 0;
         }
 
-        .social-login-separator::before, .social-login-separator::after {
+        .social-login-separator::before,
+        .social-login-separator::after {
             content: '';
             flex: 1;
             border-bottom: 1px solid var(--color-border);
@@ -277,6 +272,7 @@
             font-size: 0.9rem;
         }
 
+        /* BOTONES SOCIALES */
         .social-buttons {
             display: flex;
             flex-direction: column;
@@ -298,60 +294,55 @@
             justify-content: center;
             text-decoration: none;
             background-color: var(--color-input-bg);
-            color: var(--color-text-light); /* Texto por defecto */
+            color: var(--color-text-light);
         }
         
-        /* Google (Fondo Blanco, Texto Negro, G Multicolor) */
         .btn-google {
             background-color: var(--color-google-bg);
             color: var(--color-google-text);
-            border-color: #dadce0; /* Borde más suave */
+            border-color: #dadce0;
         }
 
-        /* Contenedor para la G de Google multicolor */
         .google-logo-icon {
-            width: 20px; /* Tamaño del icono */
+            width: 20px;
             height: 20px;
             margin-right: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold; /* Para la "G" */
+            font-weight: bold;
             font-size: 1.2rem;
             position: relative;
         }
         
-        /* Simulación de la "G" multicolor de Google */
         .google-logo-icon::before {
             content: 'G';
             position: absolute;
-            color: var(--color-google-blue); /* Azul */
+            color: var(--color-google-blue);
             left: 0;
         }
+
         .google-logo-icon::after {
-            content: 'G'; /* Letra duplicada para otros colores */
+            content: 'G';
             position: absolute;
-            color: var(--color-google-red); /* Rojo */
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0% 50%); /* Corta la mitad superior */
+            color: var(--color-google-red);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0% 50%);
             top: 0;
             left: 0;
         }
-        /* Esto es una simulación CSS, la forma más fiel sería un SVG */
 
-
-        /* Facebook (Fondo Azul de Marca, Texto Blanco, Icono F Blanco) */
         .btn-facebook {
             background-color: var(--color-facebook-bg);
             color: var(--color-facebook-text);
-            border: none; /* No necesita borde si el fondo es fuerte */
+            border: none;
         }
         
         .btn-facebook .social-icon-fb {
-            font-size: 1.3rem; /* Tamaño del icono */
+            font-size: 1.3rem;
             margin-right: 0.7rem;
             width: 20px;
             text-align: center;
-            color: var(--color-facebook-text); /* Icono blanco */
+            color: var(--color-facebook-text);
         }
 
         .btn-social:hover {
@@ -375,15 +366,27 @@
         }
 
         .registration-link a:hover {
-             text-decoration: underline;
+            text-decoration: underline;
         }
         
-        /* ALERTAS (estilos oscuros) */
+        /* ALERTAS */
         .alert {
             padding: 1rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
             display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .alert-error {
@@ -411,15 +414,34 @@
             .login-form-panel {
                 padding: 2rem;
             }
+
+            .form-container {
+                max-width: 100%;
+            }
+
+            .visual-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-form-panel {
+                padding: 1.5rem;
+            }
+
+            .form-header h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
+        <!-- PANEL VISUAL IZQUIERDO -->
         <div class="login-visual">
             <div class="visual-content">
                 <div class="logo-section">
-                    <div class="logo-icon-login"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></div>
+                    <div class="logo-icon-login">🚚</div>
                     <span class="logo-text">Movi Fletes</span>
                 </div>
                 <div>
@@ -431,10 +453,11 @@
             </div>
         </div>
 
+        <!-- PANEL DEL FORMULARIO DERECHO -->
         <div class="login-form-panel">
             <div class="form-container">
                 <a href="landing.html" class="back-link">
-                    ← Volver al inicio
+                    <i class="fas fa-arrow-left"></i> Volver al inicio
                 </a>
 
                 <div class="form-header">
@@ -442,9 +465,11 @@
                     <p>Ingresa tus credenciales para continuar</p>
                 </div>
 
+                <!-- ALERTAS -->
                 <div id="alert-error" class="alert alert-error"></div>
                 <div id="alert-success" class="alert alert-success"></div>
 
+                <!-- FORMULARIO DE LOGIN -->
                 <form id="login-form">
                     <div class="form-group-login">
                         <label for="username">Usuario</label>
@@ -453,7 +478,8 @@
                             id="username" 
                             placeholder="Ingresa tu usuario" 
                             required
-                            autocomplete="username">
+                            autocomplete="username"
+                            value="admin">
                     </div>
 
                     <div class="form-group-login">
@@ -464,7 +490,8 @@
                                 id="password" 
                                 placeholder="Ingresa tu contraseña" 
                                 required
-                                autocomplete="current-password">
+                                autocomplete="current-password"
+                                value="admin">
                             <span class="password-toggle" id="togglePassword">
                                 <i class="fas fa-eye"></i> 
                             </span>
@@ -478,17 +505,17 @@
                     <div class="social-login-separator"><span>o continuar con</span></div>
                     
                     <div class="social-buttons">
-                         <a href="#" class="btn-social btn-google">
+                        <a href="#" class="btn-social btn-google" onclick="event.preventDefault(); alert('Login con Google no disponible');">
                             <span class="google-logo-icon"></span> Google
-                         </a>
-                         <a href="#" class="btn-social btn-facebook">
+                        </a>
+                        <a href="#" class="btn-social btn-facebook" onclick="event.preventDefault(); alert('Login con Facebook no disponible');">
                             <span class="social-icon-fb"><i class="fab fa-facebook-f"></i></span> Facebook
-                         </a>
+                        </a>
                     </div>
                     
                     <p class="registration-link">
                         ¿No tienes cuenta? 
-                        <a href="#">
+                        <a href="#" onclick="event.preventDefault(); alert('Registro no disponible');">
                            Regístrate aquí
                         </a>
                     </p>
@@ -497,8 +524,86 @@
         </div>
     </div>
 
+    <!-- ========================================= -->
+    <!-- SISTEMA DE AUTENTICACIÓN - INTEGRADO -->
+    <!-- ========================================= -->
     <script>
-        // Funcionalidad del botón de ojo
+        // Sistema de Autenticación Simplificado - Fletes HN
+        const Auth = {
+            // Credenciales fijas
+            ADMIN_USER: 'admin',
+            ADMIN_PASS: 'admin',
+            SESSION_KEY: 'fleteshn_sesion',
+
+            // Iniciar sesión (solo admin)
+            login(username, password) {
+                console.log('🔐 Intentando login con:', username);
+                
+                if (username === this.ADMIN_USER && password === this.ADMIN_PASS) {
+                    const sesion = {
+                        usuario: 'admin',
+                        nombre: 'Administrador',
+                        tipo: 'usuario',
+                        fechaLogin: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem(this.SESSION_KEY, JSON.stringify(sesion));
+                    console.log('✅ Login exitoso. Sesión guardada.');
+                    
+                    return {
+                        success: true,
+                        message: 'Inicio de sesión exitoso'
+                    };
+                } else {
+                    console.log('❌ Login fallido. Credenciales incorrectas.');
+                    return {
+                        success: false,
+                        message: 'Usuario o contraseña incorrectos'
+                    };
+                }
+            },
+
+            // Cerrar sesión
+            logout() {
+                localStorage.removeItem(this.SESSION_KEY);
+                console.log('🚪 Sesión cerrada');
+                window.location.href = 'landing.html';
+            },
+
+            // Obtener usuario actual
+            obtenerUsuarioActual() {
+                const sesion = localStorage.getItem(this.SESSION_KEY);
+                return sesion ? JSON.parse(sesion) : null;
+            },
+
+            // Verificar si hay sesión activa
+            estaAutenticado() {
+                return this.obtenerUsuarioActual() !== null;
+            },
+
+            // Proteger página (requiere autenticación)
+            protegerPagina() {
+                if (!this.estaAutenticado()) {
+                    alert('Debes iniciar sesión para acceder a esta página');
+                    window.location.href = 'login.html';
+                }
+            }
+        };
+
+        // Hacer Auth disponible globalmente
+        if (typeof window !== 'undefined') {
+            window.Auth = Auth;
+        }
+
+        console.log('✅ Sistema de autenticación cargado correctamente');
+        console.log('📋 Credenciales de prueba: admin / admin');
+    </script>
+    
+    <!-- ========================================= -->
+    <!-- LÓGICA DEL FORMULARIO DE LOGIN -->
+    <!-- ========================================= -->
+    <script>
+        // Funcionalidad del botón de ojo (mostrar/ocultar contraseña)
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
 
@@ -512,10 +617,8 @@
             icon.classList.toggle('fa-eye-slash');
         });
 
-        // --- Lógica de Autenticación (Mantenida) ---
-
-        // Función para manejar la visibilidad de las alertas
-        function showAlert(element, message, type) {
+        // Función para mostrar alertas
+        function showAlert(element, message) {
             document.getElementById('alert-error').style.display = 'none';
             document.getElementById('alert-success').style.display = 'none';
             
@@ -523,51 +626,47 @@
             element.style.display = 'block';
         }
 
-        // Simulación de la función de autenticación (Asumiendo que js/auth.js no existe o falla)
-        if (typeof Auth === 'undefined') {
-            console.warn("Auth object not found. Using simulation mode.");
-            var Auth = {
-                obtenerUsuarioActual: function() { return null; },
-                login: function(u, p) {
-                    if (u === 'admin' && p === 'admin') {
-                        return { success: true, message: '' };
-                    }
-                    return { success: false, message: 'Usuario o contraseña incorrectos.' };
-                }
-            };
-        }
-        
-        // Verificar si ya hay sesión
-        const usuarioActual = Auth.obtenerUsuarioActual();
-        if (usuarioActual) {
+        // Verificar si ya hay sesión activa al cargar la página
+        console.log('🔍 Verificando sesión existente...');
+        if (Auth.estaAutenticado()) {
+            console.log('✅ Sesión activa detectada. Redirigiendo a index.html...');
             window.location.href = 'index.html';
+        } else {
+            console.log('⚠️ No hay sesión activa. Mostrando formulario de login.');
         }
 
+        // Manejar el envío del formulario
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            console.log('📝 Formulario enviado');
             
             const errorAlert = document.getElementById('alert-error');
             const successAlert = document.getElementById('alert-success');
             
-            errorAlert.style.display = 'none';
-            successAlert.style.display = 'none';
-
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
+
+            console.log('👤 Usuario ingresado:', username);
+            console.log('🔑 Contraseña ingresada:', password.length > 0 ? '***' : '(vacía)');
 
             const resultado = Auth.login(username, password);
 
             if (resultado.success) {
-                showAlert(successAlert, '¡Inicio de sesión exitoso! Redirigiendo...', 'success');
+                showAlert(successAlert, '¡Inicio de sesión exitoso! Redirigiendo...');
                 
+                console.log('⏳ Redirigiendo en 1 segundo...');
                 setTimeout(() => {
+                    console.log('➡️ Redirigiendo a index.html');
                     window.location.href = 'index.html';
                 }, 1000);
             } else {
-                showAlert(errorAlert, resultado.message, 'error');
+                showAlert(errorAlert, resultado.message);
+                console.log('❌ Mostrando mensaje de error');
             }
         });
+
+        console.log('✅ Listeners de formulario configurados');
     </script>
 </body>
 </html>
-```http://googleusercontent.com/image_generation_content/6
